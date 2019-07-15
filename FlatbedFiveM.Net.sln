@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatbedFiveM.Net", "FlatbedFiveM.Net\FlatbedFiveM.Net.csproj", "{B48C626F-F5B3-4570-A506-6BA6F0794E1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatbedFiveMServer.net", "FlatbedFiveMServer.net\FlatbedFiveMServer.net.csproj", "{F5FF3239-83F1-45C1-840A-E0694718605F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B48C626F-F5B3-4570-A506-6BA6F0794E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B48C626F-F5B3-4570-A506-6BA6F0794E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B48C626F-F5B3-4570-A506-6BA6F0794E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B48C626F-F5B3-4570-A506-6BA6F0794E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5FF3239-83F1-45C1-840A-E0694718605F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5FF3239-83F1-45C1-840A-E0694718605F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5FF3239-83F1-45C1-840A-E0694718605F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5FF3239-83F1-45C1-840A-E0694718605F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

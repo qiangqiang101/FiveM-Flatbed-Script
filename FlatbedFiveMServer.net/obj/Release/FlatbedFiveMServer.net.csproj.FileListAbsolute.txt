@@ -1,0 +1,10 @@
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\FlatbedFiveMServer.net.dll
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\FlatbedFiveMServer.net.pdb
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\CitizenFX.Core.dll
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\MsgPack.dll
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\CitizenFX.Core.pdb
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\CitizenFX.Core.xml
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\MsgPack.xml
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.dll
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.pdb
+D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.csprojResolveAssemblyReference.cache
