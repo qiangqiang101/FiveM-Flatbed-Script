@@ -7,7 +7,7 @@ using CitizenFX.Core;
 using static CitizenFX.Core.UI.Screen;
 using static CitizenFX.Core.Native.API;
 
-namespace FlatbedFiveM.Net
+namespace FlatbedFiveM.Net.Class
 {
     #region Error Templates
     /// <summary>

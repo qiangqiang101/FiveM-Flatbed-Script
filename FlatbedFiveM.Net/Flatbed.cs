@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static FlatbedFiveM.Net.Helper;
+using static FlatbedFiveM.Net.Class.Helper;
 using static CitizenFX.Core.Native.API;
+using FlatbedFiveM.Net.Class;
 
 namespace FlatbedFiveM.Net
 {
