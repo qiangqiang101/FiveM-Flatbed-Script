@@ -8,3 +8,8 @@ D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\bin\Release\MsgPack.xml
 D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.dll
 D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.pdb
 D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.csprojResolveAssemblyReference.cache
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\FlatbedFiveMServer.net.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\FlatbedFiveMServer.net.pdb
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.csprojResolveAssemblyReference.cache
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.pdb

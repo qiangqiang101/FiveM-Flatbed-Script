@@ -8,3 +8,13 @@ D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveM.Net\bin\Release\MsgPack.xml
 D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.net.dll
 D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.net.pdb
 D:\Projects\Mods\FlatbedFiveM.Net\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.Net.csprojResolveAssemblyReference.cache
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\FlatbedFiveM.net.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\FlatbedFiveM.net.pdb
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\CitizenFX.Core.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\MsgPack.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\CitizenFX.Core.pdb
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\CitizenFX.Core.xml
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\MsgPack.xml
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.Net.csprojResolveAssemblyReference.cache
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.net.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.net.pdb

@@ -190,14 +190,14 @@ namespace FlatbedFiveM.Net.Class
             AttachEntityToEntityPhysically(entity1.Handle, entity2.Handle, boneindex1, boneindex2, position1.X, position1.Y, position1.Z, 0f, 0f, 0f, rotation.X, rotation.Y, rotation.Z, 5000f, true, false, true, true, 2);
         }
 
-        public async static Task DetachToFix(this Vehicle carToDetach)
+        public async static Task DetachToFix(this Vehicle carToDetach, bool facingBackwards)
         {
             await Task.FromResult(0);
             Vehicle attachedCar = (Vehicle)carToDetach.GetEntityAttachedTo();
             Vector3 p2 = new Vector3(attachedCar.AttachCoords().X, attachedCar.AttachCoords().Y, attachedCar.AttachCoords().Z + 0.3f);
             DetachEntity(carToDetach.Handle, true, true);
             await BaseScript.Delay(10);
-            carToDetach.AttachToFix(attachedCar, attachedCar.AttachDummyIndex(), p2, Vector3.Zero);
+            if (facingBackwards) { carToDetach.AttachToFix(attachedCar, attachedCar.AttachDummyIndex(), p2, new Vector3(0f, 0f, 180f)); } else { carToDetach.AttachToFix(attachedCar, attachedCar.AttachDummyIndex(), p2, Vector3.Zero); }
             await BaseScript.Delay(10);
             DetachEntity(carToDetach.Handle, true, true);
             await BaseScript.Delay(10);
