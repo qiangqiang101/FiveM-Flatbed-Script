@@ -152,7 +152,7 @@ namespace FlatbedFiveM.Net
                         TriggerServerEvent("flatbed:SetTowingVehicle", PP.Handle, LF.Handle, GetEntityAttachedTo(LF.Handle));
                     }
 
-                    if (PP.IsInVehicle())
+                    if (PP.IsInVehicle()) //Player is in vehicle
                     {
                         //Detach towing vehicle if player is inside towing vehicle
                         if (PP.CurrentVehicle == LF.CurrentTowingVehicle())
@@ -225,6 +225,7 @@ namespace FlatbedFiveM.Net
 
                                         PP.Task.ClearAll();
 
+                                        //Vehicle heading is almost same as Flatbed
                                         if (LV.IsVehicleFacingFlatbed(LF))
                                         {
                                             TriggerServerEvent("flatbed:AddRope", PP.Handle, LF.Handle, LV.Handle);
@@ -257,6 +258,7 @@ namespace FlatbedFiveM.Net
                                             FreezeEntityPosition(LF.Handle, false);
                                             LV.AttachToFix(LF, LF.AttachDummyIndex(), LV.AttachCoords(), Vector3.Zero);
                                         }
+                                        //Vehicle heading is the opposite of Flatbed
                                         else
                                         {
                                             TriggerServerEvent("flatbed:AddRope", PP.Handle, LF.Handle, LV.Handle);
@@ -294,8 +296,9 @@ namespace FlatbedFiveM.Net
                             }
                         }
                     }
-                    else
+                    else //Player is not in vehicle
                     {
+                        //Unload vehicle while flatbed is lowered
                         if (LF.IsFlatbedDropped() && PP.Position.DistanceTo(LF.AttachDummyPos()) <= 3f)
                         {
                             if (World.GetDistance(LF.CurrentTowingVehicle().Position, PP.Position) <= 3f)
@@ -336,73 +339,99 @@ namespace FlatbedFiveM.Net
                             }
                         }
 
-
-                    }
-
-                    
-
-                    //Todo: continue here.
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"{ex.Message}{ex.StackTrace}");
-            }
-        }
-
-        public async Task OnTickasdasdasdas()
-        {
-            await Task.FromResult(0);
-
-            try
-            {
-                if (LF.Exists()) //Handle != 0
-                {                    
-                    
-                    //Todo: continue here.
-                    if (!PP.IsInVehicle() && LF.CurrentTowingVehicle().Handle == 0 && LF.IsFlatbedDropped() && LF.AttachPosition().IsAnyVehicleNearAttachPosition(2f))
-                    {
-                        Vehicle TV = PP.Position.WorldGetClosestVehicle();
-                        if (TV.Model != LF.Model && AC.Contains(TV.ClassType) && PP.Position.DistanceTo(TV.GetRopeHook()) <= 1.5f)
+                        if (LF.CurrentTowingVehicle().Handle == 0 && LF.IsFlatbedDropped() && LF.AttachPosition().IsAnyVehicleNearAttachPosition(2f))
                         {
-                            DisplayHelpTextThisFrame($"Press ~INPUT_VEH_BIKE_WINGS~ to load {TV.LocalizedName}.");
-                            if (Game.IsControlJustPressed(0, Control.VehicleBikeWings))
+                            Vehicle thatVehicle = PP.Position.WorldGetClosestVehicle();
+                            //Vehicle heading is almost same as Flatbed
+                            if (thatVehicle.Model != LF.Model && AC.Contains(thatVehicle.ClassType) && PP.Position.DistanceTo(thatVehicle.GetRopeHook()) <= 1.5f)
                             {
-                                LF.CurrentTowingVehicle(TV);
-                                TriggerServerEvent("flatbed:SetTowingVehicle", PP.Handle, LF.Handle, TV.Handle);
-                                TV.IsPersistent = true;
-                                if (TV.IsOnAllWheels)
+                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK"), hookKey.GetButtonIcon(), thatVehicle.LocalizedName));
+                                if (Game.IsControlJustPressed(0, hookKey))
                                 {
-                                    if (DecorGetFloat(TV.Handle, gHeightDecor) == 0f) { DecorSetFloat(TV.Handle, gHeightDecor, TV.HeightAboveGround); }
-                                }
-                                FreezeEntityPosition(LF.Handle, true);
-                                TriggerServerEvent("flatbed:AddRope", PP.Handle, LF.Handle, LV.Handle);
-                                ES = false;
-                                Rope rope = World.AddRope((RopeType)6, LF.GetBoneCoord("misc_b"), Vector3.Zero, LF.GetBoneCoord("misc_b").DistanceTo(TV.GetRopeHook()), 0.1f, false);
-                                rope.AttachEntities(LF, LF.GetBoneCoord("misc_b"), TV, TV.GetRopeHook(), LF.GetBoneCoord("misc_b").DistanceTo(TV.GetRopeHook()));
-                                rope.ActivatePhysics();
-                                do
-                                {
-                                    if (ES == true)
+                                    LF.CurrentTowingVehicle(thatVehicle);
+                                    TriggerServerEvent("flatbed:SetTowingVehicle", PP.Handle, LF.Handle, thatVehicle.Handle);
+                                    thatVehicle.IsPersistent = true;
+                                    if (thatVehicle.IsOnAllWheels)
                                     {
-                                        ES = false;
-                                        rope.StopWinding();
-                                        rope.DetachEntity(LF);
-                                        rope.DetachEntity(TV);
-                                        rope.Delete();
-                                        return;
+                                        if (DecorGetFloat(thatVehicle.Handle, gHeightDecor) == 0f) { DecorSetFloat(thatVehicle.Handle, gHeightDecor, thatVehicle.HeightAboveGround); }
                                     }
-                                    rope.StartWinding();
-                                    Game.DisableControlThisFrame(0, Control.VehicleMoveUpDown);
-                                    TV.PushVehicleForward();
-                                    await Delay(5);
-                                } while (!(rope.Length <= 1.9f));
-                                rope.StopWinding();
-                                rope.DetachEntity(LF);
-                                rope.DetachEntity(TV);
-                                rope.Delete();
-                                FreezeEntityPosition(LF.Handle, false);
-                                TV.AttachToFix(LF, LF.GetBoneIndex("misc_a"), TV.AttachCoords(), Vector3.Zero);
+                                    FreezeEntityPosition(LF.Handle, true);
+                                    TriggerServerEvent("flatbed:AddRope", PP.Handle, LF.Handle, LV.Handle);
+                                    ES = false;
+                                    Rope rope = World.AddRope((RopeType)6, LF.WinchDummyPos(), Vector3.Zero, LF.WinchDummyPos().DistanceTo(thatVehicle.GetRopeHook()), 0.1f, false);
+                                    rope.AttachEntities(LF, LF.WinchDummyPos(), thatVehicle, thatVehicle.GetRopeHook(), LF.WinchDummyPos().DistanceTo(thatVehicle.GetRopeHook()));
+                                    rope.ActivatePhysics();
+                                    do
+                                    {
+                                        if (ES == true)
+                                        {
+                                            ES = false;
+                                            rope.StopWinding();
+                                            rope.DetachEntity(LF);
+                                            rope.DetachEntity(thatVehicle);
+                                            rope.Delete();
+                                            return;
+                                        }
+                                        if (!thatVehicle.IsAnyPedBlockingVehicle(LF))
+                                        {
+                                            rope.StartWinding();
+                                            Game.DisableControlThisFrame(0, Control.VehicleMoveUpDown);
+                                        }
+                                        await Delay(5);
+                                    } while (!(rope.Length <= 1.9f));
+                                    rope.StopWinding();
+                                    rope.DetachEntity(LF);
+                                    rope.DetachEntity(thatVehicle);
+                                    rope.Delete();
+                                    FreezeEntityPosition(LF.Handle, false);
+                                    thatVehicle.AttachToFix(LF, LF.GetBoneIndex("misc_a"), thatVehicle.AttachCoords(), Vector3.Zero);
+                                }
+                            }
+
+                            //Vehicle heading is the opposite of Flatbed
+                            if (thatVehicle.Model != LF.Model && AC.Contains(thatVehicle.ClassType) && PP.Position.DistanceTo(thatVehicle.GetRopeHookRear()) <= 1.5f)
+                            {
+                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK"), hookKey.GetButtonIcon(), thatVehicle.LocalizedName));
+                                if (Game.IsControlJustPressed(0, hookKey))
+                                {
+                                    LF.CurrentTowingVehicle(thatVehicle);
+                                    TriggerServerEvent("flatbed:SetTowingVehicle", PP.Handle, LF.Handle, thatVehicle.Handle);
+                                    thatVehicle.IsPersistent = true;
+                                    if (thatVehicle.IsOnAllWheels)
+                                    {
+                                        if (DecorGetFloat(thatVehicle.Handle, gHeightDecor) == 0f) { DecorSetFloat(thatVehicle.Handle, gHeightDecor, thatVehicle.HeightAboveGround); }
+                                    }
+                                    FreezeEntityPosition(LF.Handle, true);
+                                    TriggerServerEvent("flatbed:AddRope", PP.Handle, LF.Handle, LV.Handle);
+                                    ES = false;
+                                    Rope rope = World.AddRope((RopeType)6, LF.WinchDummyPos(), Vector3.Zero, LF.WinchDummyPos().DistanceTo(thatVehicle.GetRopeHookRear()), 0.1f, false);
+                                    rope.AttachEntities(LF, LF.WinchDummyPos(), thatVehicle, thatVehicle.GetRopeHookRear(), LF.WinchDummyPos().DistanceTo(thatVehicle.GetRopeHookRear()));
+                                    rope.ActivatePhysics();
+                                    do
+                                    {
+                                        if (ES == true)
+                                        {
+                                            ES = false;
+                                            rope.StopWinding();
+                                            rope.DetachEntity(LF);
+                                            rope.DetachEntity(thatVehicle);
+                                            rope.Delete();
+                                            return;
+                                        }
+                                        if (!thatVehicle.IsAnyPedBlockingVehicle(LF))
+                                        {
+                                            rope.StartWinding();
+                                            Game.DisableControlThisFrame(0, Control.VehicleMoveUpDown);
+                                        }
+                                        await Delay(5);
+                                    } while (!(rope.Length <= 1.9f));
+                                    rope.StopWinding();
+                                    rope.DetachEntity(LF);
+                                    rope.DetachEntity(thatVehicle);
+                                    rope.Delete();
+                                    FreezeEntityPosition(LF.Handle, false);
+                                    thatVehicle.AttachToFix(LF, LF.GetBoneIndex("misc_a"), thatVehicle.AttachCoords(), new Vector3(0f,0f,180f));
+                                }
                             }
                         }
                     }
@@ -431,8 +460,8 @@ namespace FlatbedFiveM.Net
 
                 if (_fb.Position.DistanceTo(PP.Position) <= 50f)
                 {
-                    Rope rope = World.AddRope((RopeType)6, _fb.GetBoneCoord("misc_b"), Vector3.Zero, _fb.GetBoneCoord("misc_b").DistanceTo(_veh.GetRopeHook()), 0.1f, false);
-                    rope.AttachEntities(_fb, _fb.GetBoneCoord("misc_b"), LV, _veh.GetRopeHook(), _fb.GetBoneCoord("misc_b").DistanceTo(_veh.GetRopeHook()));
+                    Rope rope = World.AddRope((RopeType)6, _fb.WinchDummyPos(), Vector3.Zero, _fb.WinchDummyPos().DistanceTo(_veh.GetRopeHook()), 0.1f, false);
+                    rope.AttachEntities(_fb, _fb.WinchDummyPos(), LV, _veh.GetRopeHook(), _fb.WinchDummyPos().DistanceTo(_veh.GetRopeHook()));
                     rope.ActivatePhysics();
                     do
                     {
