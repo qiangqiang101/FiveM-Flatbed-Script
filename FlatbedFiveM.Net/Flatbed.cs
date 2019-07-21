@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using static FlatbedFiveM.Net.Class.Helper;
 using static CitizenFX.Core.Native.API;
 using FlatbedFiveM.Net.Class;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace FlatbedFiveM.Net
 {
@@ -21,6 +24,9 @@ namespace FlatbedFiveM.Net
         {
             PP = Game.PlayerPed;
             LV = Game.PlayerPed.LastVehicle;
+
+            LoadSettings();
+            LoadVehicles();
 
             DecorRegister(modDecor, 2);
             DecorRegister(towVehDecor, 3);
@@ -110,13 +116,13 @@ namespace FlatbedFiveM.Net
                     {
                         if (manualControl)
                         {
-                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP"), $"{liftKey.GetButtonIcon()} {lowerKey.GetButtonIcon()}"));
+                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP", "Press {0} to lift/lower the bed."), $"{liftKey.GetButtonIcon()} {lowerKey.GetButtonIcon()}"));
                             if (Game.IsControlPressed(0, liftKey)) { LF.DropBedManually(true); }
                             if (Game.IsControlPressed(0, lowerKey)) { LF.DropBedManually(false); }
                         }
                         else
                         {
-                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP"), hookKey.GetButtonIcon()));
+                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP", "Press {0} to lift/lower the bed."), hookKey.GetButtonIcon()));
                             if (Game.IsControlJustPressed(0, hookKey)) { await LF.DropBed(); }
                         }
                     }
@@ -125,11 +131,11 @@ namespace FlatbedFiveM.Net
                     {
                         if (manualControl)
                         {
-                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP"), $"{liftKey.GetButtonIcon()} {lowerKey.GetButtonIcon()}"));
+                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP", "Press {0} to lift/lower the bed."), $"{liftKey.GetButtonIcon()} {lowerKey.GetButtonIcon()}"));
                         }
                         else
                         {
-                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP"), hookKey.GetButtonIcon()));
+                            DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HELP", "Press {0} to lift/lower the bed."), hookKey.GetButtonIcon()));
                         }
                         DecorSetBool(LF.Handle, helpDecor, true);
                     }
@@ -168,7 +174,7 @@ namespace FlatbedFiveM.Net
                         {
                             if (!LV.IsThisFlatbed3() && LF.CurrentTowingVehicle().Handle == 0 && AC.Contains(LV.ClassType))
                             {
-                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK"), hookKey.GetButtonIcon(), PP.CurrentVehicle.LocalizedName));
+                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK", "Press {0} to load {1}."), hookKey.GetButtonIcon(), PP.CurrentVehicle.LocalizedName));
                                 if (Game.IsControlJustPressed(0, hookKey))
                                 {
                                     LF.CurrentTowingVehicle(PP.CurrentVehicle);
@@ -196,7 +202,7 @@ namespace FlatbedFiveM.Net
                             {
                                 if (LV.Model != LF.Model)
                                 {
-                                    DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK"), hookKey.GetButtonIcon(), LV.LocalizedName));
+                                    DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK", "Press {0} to load {1}."), hookKey.GetButtonIcon(), LV.LocalizedName));
                                     if (Game.IsControlJustPressed(0, hookKey))
                                     {
                                         LF.CurrentTowingVehicle(LV);
@@ -303,7 +309,7 @@ namespace FlatbedFiveM.Net
                         {
                             if (World.GetDistance(LF.CurrentTowingVehicle().Position, PP.Position) <= 3f)
                             {
-                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_UNHOOK"), hookKey.GetButtonIcon(), LF.CurrentTowingVehicle().LocalizedName));
+                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_UNHOOK", "Press {0} to unload {1}."), hookKey.GetButtonIcon(), LF.CurrentTowingVehicle().LocalizedName));
                                 if (Game.IsControlJustPressed(0, hookKey))
                                 {
                                     Vehicle towVeh = LF.CurrentTowingVehicle();
@@ -345,7 +351,7 @@ namespace FlatbedFiveM.Net
                             //Vehicle heading is almost same as Flatbed
                             if (thatVehicle.Model != LF.Model && AC.Contains(thatVehicle.ClassType) && PP.Position.DistanceTo(thatVehicle.GetRopeHook()) <= 1.5f)
                             {
-                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK"), hookKey.GetButtonIcon(), thatVehicle.LocalizedName));
+                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK", "Press {0} to load {1}."), hookKey.GetButtonIcon(), thatVehicle.LocalizedName));
                                 if (Game.IsControlJustPressed(0, hookKey))
                                 {
                                     LF.CurrentTowingVehicle(thatVehicle);
@@ -391,7 +397,7 @@ namespace FlatbedFiveM.Net
                             //Vehicle heading is the opposite of Flatbed
                             if (thatVehicle.Model != LF.Model && AC.Contains(thatVehicle.ClassType) && PP.Position.DistanceTo(thatVehicle.GetRopeHookRear()) <= 1.5f)
                             {
-                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK"), hookKey.GetButtonIcon(), thatVehicle.LocalizedName));
+                                DisplayHelpTextThisFrame(String.Format(GetLangEntry("INM_FB_HOOK", "Press {0} to load {1}."), hookKey.GetButtonIcon(), thatVehicle.LocalizedName));
                                 if (Game.IsControlJustPressed(0, hookKey))
                                 {
                                     LF.CurrentTowingVehicle(thatVehicle);

@@ -18,3 +18,5 @@ E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\
 E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.Net.csprojResolveAssemblyReference.cache
 E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.net.dll
 E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\obj\Release\FlatbedFiveM.net.pdb
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\System.Reflection.Metadata.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveM.Net\bin\Release\System.Collections.Immutable.dll

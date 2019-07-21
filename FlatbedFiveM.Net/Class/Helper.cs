@@ -14,9 +14,9 @@ namespace FlatbedFiveM.Net.Class
     static class Helper
     {
         // Config
-        public static string configcfg = LoadResourceFile("Flatbed", "Config.cfg");
-        public static string vehiclesxml = LoadResourceFile("Flatbed", "Vehicles.xml");
-        public static string langcfg = LoadResourceFile("Flatbed", "Lang.cfg");
+        public static IniConfig config = new IniConfig(GetCurrentResourceName(), "config.ini");
+        public static string vehiclesxml = LoadResourceFile(GetCurrentResourceName(), "vehicles.xml");
+        public static IniConfig lang = new IniConfig(GetCurrentResourceName(), "lang.ini");
         public static List<FlatbedData> fbVehs = new List<FlatbedData>();
         public static VehicleData vehData = new VehicleData(vehiclesxml).Instance;
         public static bool marker = true;
@@ -47,18 +47,18 @@ namespace FlatbedFiveM.Net.Class
             return new Vector3(0f, 1f, 0.1f + DecorGetFloat(veh.Handle, gHeightDecor));
         }
 
-        public static bool IsAnyPedInVehicleNearBed(this Vehicle veh, float radius)
-        {
-            Vector3 pos = veh.AttachDummyPos();
-            if (IsAnyPedNearPoint(pos.X, pos.Y, pos.Z, radius))
-            {
-                if (Game.Player.Character.IsInVehicle())
-                    return true;
-                else
-                    return false;
-            }
-            return false;
-        }
+        //public static bool IsAnyPedInVehicleNearBed(this Vehicle veh, float radius)
+        //{
+        //    Vector3 pos = veh.AttachDummyPos();
+        //    if (IsAnyPedNearPoint(pos.X, pos.Y, pos.Z, radius))
+        //    {
+        //        if (Game.Player.Character.IsInVehicle())
+        //            return true;
+        //        else
+        //            return false;
+        //    }
+        //    return false;
+        //}
 
         public static Vehicle WorldGetClosestVehicle(this Vector3 pos, float distance = 20f)
         {
@@ -99,10 +99,10 @@ namespace FlatbedFiveM.Net.Class
             DecorSetInt(flatbed.Handle, towVehDecor, handle);
         }
 
-        public static float GroundHeight(this Entity ent)
-        {
-            return ent.HeightAboveGround;
-        }
+        //public static float GroundHeight(this Entity ent)
+        //{
+        //    return ent.HeightAboveGround;
+        //}
 
         public static bool IsFlatbedDropped(this Vehicle veh)
         {
@@ -134,10 +134,10 @@ namespace FlatbedFiveM.Net.Class
             return veh.AttachDummyPos() - (veh.ForwardVector * 7);
         }
 
-        public static Vector3 DetachPosition(this Vehicle veh)
-        {
-            return veh.AttachDummyPos() - (veh.ForwardVector * 10);
-        }
+        //public static Vector3 DetachPosition(this Vehicle veh)
+        //{
+        //    return veh.AttachDummyPos() - (veh.ForwardVector * 10);
+        //}
 
         public static void DrawMarkerTick(this Vehicle veh)
         {
@@ -220,10 +220,10 @@ namespace FlatbedFiveM.Net.Class
             DisplayHelpTextFromStringLabel(0, false, true, Shape);
         }
 
-        public static bool Cheating(string Cheat)
-        {
-            return HasCheatStringJustBeenEntered((uint)Game.GenerateHash(Cheat));
-        }
+        //public static bool Cheating(string Cheat)
+        //{
+        //    return HasCheatStringJustBeenEntered((uint)Game.GenerateHash(Cheat));
+        //}
 
         public static Vehicle LastFlatbed(this Ped ped)
         {
@@ -247,11 +247,11 @@ namespace FlatbedFiveM.Net.Class
 
         public static void LoadSettings()
         {
-            marker = bool.Parse(CfgRead.ReadCfgValue("MARKER", configcfg));
-            manualControl = bool.Parse(CfgRead.ReadCfgValue("MANUALCONTROL", configcfg));
-            hookKey = (Control) Enum.Parse(typeof(Control), CfgRead.ReadCfgValue("HOOKKEY", configcfg));
-            liftKey = (Control)Enum.Parse(typeof(Control), CfgRead.ReadCfgValue("LIFTKEY", configcfg));
-            lowerKey = (Control)Enum.Parse(typeof(Control), CfgRead.ReadCfgValue("LOWERKEY", configcfg));
+            marker = config.GetBoolValue("SETTING", "MARKER", true);
+            manualControl = config.GetBoolValue("SETTING", "MANUALCONTROL", true);
+            hookKey = (Control)config.GetIntValue("CONTROL", "HOOKKEY", 354);
+            liftKey = (Control)config.GetIntValue("CONTROL", "LIFTKEY", 131);
+            lowerKey = (Control)config.GetIntValue("CONTROL", "LOWERKEY", 132);
         }
 
         public static String GetButtonIcon(this Control control)
@@ -740,15 +740,9 @@ namespace FlatbedFiveM.Net.Class
             }
         }
 
-        public static string GetLangEntry(string lang)
+        public static string GetLangEntry(string langstr, string fallback)
         {
-            string result = CfgRead.ReadCfgValue($"{Game.Language.ToString()}_{lang}", langcfg);
-            string real_result = null;
-            if (result == null)
-                real_result = "NULL";
-            else
-                real_result = result;
-            return real_result;
+            return lang.GetStringValue(Game.Language.ToString().Trim().ToUpper(), langstr, fallback);
         }
 
         public static bool IsAnyPedBlockingVehicle(this Vehicle veh, Vehicle fb)

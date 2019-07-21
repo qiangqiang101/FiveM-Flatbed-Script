@@ -13,3 +13,8 @@ E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.ne
 E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.csprojResolveAssemblyReference.cache
 E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.dll
 E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\obj\Release\FlatbedFiveMServer.net.pdb
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\CitizenFX.Core.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\MsgPack.dll
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\CitizenFX.Core.pdb
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\CitizenFX.Core.xml
+E:\Users\Bartholomew\Documents\GitHub\FiveM-Flatbed-Script\FlatbedFiveMServer.net\bin\Release\MsgPack.xml

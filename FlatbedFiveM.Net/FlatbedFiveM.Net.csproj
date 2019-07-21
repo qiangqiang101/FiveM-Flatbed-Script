@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\CfgRead.cs" />
+    <Compile Include="Class\IniConfig.cs" />
     <Compile Include="Class\SHVDN.cs" />
     <Compile Include="Class\VehicleData.cs" />
     <Compile Include="Flatbed.cs" />
