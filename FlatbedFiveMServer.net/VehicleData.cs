@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace FlatbedFiveM.Net.Class
+namespace FlatbedFiveMServer.net
 {
     public class VehicleData
     {
@@ -10,7 +10,7 @@ namespace FlatbedFiveM.Net.Class
         {
             get
             {
-                return ReadFromString();
+                return ReadFromFile();
             }
         }
 
@@ -24,15 +24,15 @@ namespace FlatbedFiveM.Net.Class
             FileName = _fileName;
         }
 
-        //public void Save()
-        //{
-        //    var ser = new XmlSerializer(typeof(VehicleData));
-        //    TextWriter writer = new StreamWriter(FileName);
-        //    ser.Serialize(writer, this);
-        //    writer.Close();
-        //}
+        public void Save()
+        {
+            var ser = new XmlSerializer(typeof(VehicleData));
+            TextWriter writer = new StreamWriter(FileName);
+            ser.Serialize(writer, this);
+            writer.Close();
+        }
 
-        public VehicleData ReadFromString()
+        public VehicleData ReadFromFile()
         {
             if (!File.Exists(FileName))
                 return new VehicleData(FileName);
@@ -40,7 +40,7 @@ namespace FlatbedFiveM.Net.Class
             try
             {
                 var ser = new XmlSerializer(typeof(VehicleData));
-                TextReader reader = new StringReader(FileName);
+                TextReader reader = new StreamReader(FileName);
                 var instance = (VehicleData)ser.Deserialize(reader);
                 reader.Close();
                 return instance;

@@ -48,7 +48,6 @@
     <Compile Include="Class\SHVDN.cs" />
     <Compile Include="Class\VehicleData.cs" />
     <Compile Include="Flatbed.cs" />
-    <Compile Include="Class\FlatbedData.cs" />
     <Compile Include="Class\Helper.cs" />
     <Compile Include="Class\Notify.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

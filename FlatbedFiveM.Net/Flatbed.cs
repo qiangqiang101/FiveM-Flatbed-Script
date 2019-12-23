@@ -25,9 +25,6 @@ namespace FlatbedFiveM.Net
             PP = Game.PlayerPed;
             LV = Game.PlayerPed.LastVehicle;
 
-            LoadSettings();
-            LoadVehicles();
-
             DecorRegister(modDecor, 2);
             DecorRegister(towVehDecor, 3);
             DecorRegister(lastFbVehDecor, 3);
@@ -37,6 +34,11 @@ namespace FlatbedFiveM.Net
 
             EventHandlers.Add("flatbed:AddRope", new Action<int, int, int>(WorldAddRope));
             EventHandlers.Add("flatbed:SetTowingVehicle", new Action<int, int, int>(SetTowingVehicle));
+            EventHandlers.Add("flatbed:SendFlatbedVehicles", new Action<List<FlatbedData>>(SendFlatbedVehicles));
+
+            LoadSettings();
+            //LoadVehicles();
+            TriggerServerEvent("flatbed:SendFlatbedVehicles");
 
             RegisterCommand("stopwinch", new Action<int, List<object>, string>((src, args, raw) =>
             {
@@ -60,6 +62,8 @@ namespace FlatbedFiveM.Net
                 PP = Game.PlayerPed;
                 LV = Game.PlayerPed.LastVehicle;
                 LF = Game.PlayerPed.LastFlatbed();
+
+                DisplayHelpTextThisFrame("");
             }
             catch (Exception ex)
             {
@@ -491,6 +495,11 @@ namespace FlatbedFiveM.Net
                 Vehicle _veh = vehicles.Find(x => x.Handle == Veh);
                 DecorSetInt(_fb.Handle, towVehDecor, _veh.Handle);
             }
+        }
+
+        private void SendFlatbedVehicles(List<FlatbedData> Vehs)
+        {
+            fbVehs = Vehs;
         }
     }
 }
